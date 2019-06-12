@@ -1,0 +1,7 @@
+\makeatletter
+
+\renewcommand{\maketitle}{
+\newpage \null \vspace*{-2em} \begin {center}\let \footnote \thanks {\LARGE \textbf{\@title} \par }\vskip 1.5em{\large \lineskip .5em\begin {tabular}[t]{c}\@author \end {tabular}\par }\vskip 1em{\large \@date }\ifdraft{(Draft of \today, \currenttime)\par}{}\end {center}\par \vskip 1em
+}
+
+\makeatother

@@ -1,0 +1,127 @@
+\usepackage{suffix} % Allows starred commands
+
+\usepackage{ifdraft}
+
+\usepackage{datetime}
+
+\renewcommand\refname{References}		%Change the name of the bibliography
+
+\renewenvironment{quote}
+               {\list{}{\rightmargin\leftmargin}%
+                \item\relax\small}
+               {\endlist}
+
+%===========%
+%   Fonts   %
+%===========%
+
+\usepackage[T1]{fontenc}		% For more font encoding options
+\usepackage{lmodern}		% For better quality fonts
+\usepackage{charter}
+\usepackage[normalem]{ulem}
+% Without the option, \emph{...} = underlining not italics
+% Underline: \uline{...}.
+% Double underline: \uuline{...}
+% Dashed underline: \dashuline{...}
+% Dotted underline: \dotuline{...}
+% For strikeout: cmd = \sout{...}
+% To add a wavy underline, use \uwave{...}.
+% For a strike-out (strikethrough), use \sout{...}.
+% For a slash through each individual character \xout{...}.
+
+%=============%
+%	Symbols   %
+%=============%
+
+\usepackage{latexsym,amsmath,amssymb,wasysym}
+% Also loads amsfonts.
+% \mathbb{...} for blackboard bold.
+
+\newcommand{\at}{%
+  \relax%
+  \ifmmode%
+  $\MVAt$%
+  \else%
+  \MVAt%
+  \fi%
+}
+
+\usepackage{phonetic} % For \riota (turned iota)
+
+\usepackage{centernot} % Properly centres \not command on following argument
+
+\usepackage{mathtools} % Provides \coloneqq
+
+\usepackage{stmaryrd} % Various symbols including semantic interpretation brackets \llbracket and \rrbracket
+
+%============================%
+%	Graphics and diagrams	 %
+%============================%
+
+\usepackage{graphicx}
+
+\usepackage{pstricks}
+\usepackage{pst-node}
+
+\usepackage{tikz}
+
+%===============%
+%	Layout		%
+%===============%
+
+\usepackage{booktabs}	% Better quality tables.
+% Commands: \toprule, \midrule, \cmidrule, \bottomrule
+
+\usepackage[font=small, labelfont=bf]{caption}	% Caption formatting
+
+\usepackage{pbox}
+
+\usepackage{multicol,multirow}
+
+%=================%
+%	Bibliography  %
+%=================%
+
+\usepackage{natbib}		% Author-year citations
+\bibpunct{(}{)}{;}{a}{}{,}	%
+% {opening bracket style}
+% {closing bracket style}
+% {punctuation between multiple citations}
+% {n=numerical, s=superscript numerical, a=author year}
+% {punctuation btwn author and year}
+% {punctuation between years with shared author}
+\setcitestyle{notesep={:\ }}	% Changes separator between year and page to colon
+
+%==================%
+%   Linguistics    %
+%==================%
+
+% AVMs
+\usepackage{avm}
+\avmfont{\sc}
+
+% Examples
+\usepackage{linguex}
+\let\eachwordtwo=\it		  % Italicises second line of gloss
+\renewcommand{\firstrefdash}{}
+
+% Proofs
+\usepackage{prooftree}
+
+% Syntax trees
+\usepackage{mary-trees}
+\usepackage{tikz-qtree}
+
+% IPA
+\usepackage{tipa}
+
+% OT tableaux
+\usepackage[round, medium]{OTtablx}		%For OT tableaux.
+\usepackage{pifont}
+
+
+%%%%%%%%%%%
+
+\frenchspacing				% Spacing after periods
+
+\usepackage{lipsum}

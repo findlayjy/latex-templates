@@ -1,0 +1,51 @@
+\documentclass[
+11pt,
+a4paper
+]{article}
+
+\input{settings/standard-settings}
+\input{settings/handout-settings}
+
+%% Fonts
+\usepackage{times}		% Times font
+%\usepackage[sc,osf]{mathpazo}% Palatino font, w/ smallcaps & old-style figures
+
+%===========%
+%   Macros  %
+%===========%
+
+\input{jyf-macros}
+
+%===========%
+%   Title   %
+%===========%
+
+\title{Title over two \\ lines}
+\author{Jamie Y. Findlay\\\small University of Oxford\\\small\email{jamie.findlay@ling-phil.ox.ac.uk}}
+\date{Conference name\\Location\\Date}
+
+%===================%
+%   Document start  %
+%===================%
+
+\begin{document}
+
+\maketitle
+
+\section{Section}
+
+\begin{itemize}
+
+\item \lipsum[1][1-3]
+
+\end{itemize}
+
+
+%===================%
+%   Bibliography    %
+%===================%
+
+\bibliographystyle{sp}				% Semantics & Pragmatics bibliography style
+\bibliography{linguistics}
+
+\end{document}

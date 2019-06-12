@@ -1,0 +1,92 @@
+\documentclass[%
+handout,%
+11pt%
+]{beamer}
+
+\input{settings/beamer-settings}
+\input{settings/oxford-presentation-settings}
+
+%% Fonts
+\usepackage{times}		% Times font
+%\usepackage[sc,osf]{mathpazo}% Palatino font, w/ smallcaps & old-style figures
+
+%===========%
+%   Macros  %
+%===========%
+
+\input{jyf-macros}
+
+%%%%%%%%%%%%%%%%%%%%%%
+%	Title info       %
+%%%%%%%%%%%%%%%%%%%%%%
+
+%% Information (author, title, etc.) %%
+
+\title[Short title]{Long title} % short title for footer
+\author%
+{\textsc{Jamie Y. Findlay}\\
+    \email{jamie.findlay@ling-phil.ox.ac.uk}
+}
+\institute%
+{%
+    \textit{University of Oxford}
+}
+\date[Short conf. title]{Conference title\\[1ex] Date}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%	Document body     %
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+
+\begin{frame}[plain]
+    \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Outline}
+  \setcounter{tocdepth}{2}
+  \tableofcontents
+\end{frame}
+
+\setbeamertemplate{sidebar left}[sidebar theme]
+
+\section{Section title}
+
+\begin{frame}{Title}
+  % \framesubtitle{Subtitle}
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%
+%	Bibliography    %
+%%%%%%%%%%%%%%%%%%%%%
+% \addtolength{\headsep}{0.6cm}
+
+% \setlength{\paperheight}{20em}
+\setbeamertemplate{frametitle}
+{%
+    \begin{picture}(0,0)
+        \put(-8,-25){%
+            \normalsize\color{oxfordblue}\insertframetitle
+        }
+        \put(-7,-37){%
+            \tiny\color{oxfordblue}\insertframesubtitle
+        }
+    \end{picture}
+    \vspace{5ex}
+}
+
+\setbeamertemplate{footline}{}
+
+\begin{frame}[allowframebreaks]{References}
+  %\tiny
+  \bibliographystyle{sp}
+  \bibliography{linguistics}
+\end{frame}
+
+\end{document}

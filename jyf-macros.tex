@@ -1,0 +1,266 @@
+%%%%%% GENERAL %%%%%%
+
+%% Abbreviations
+\newcommand{\definedas}{\ensuremath{\coloneqq}}
+\newcommand{\andor}{and\slash or}
+
+%% Thesis-specific stuff
+\newcommand{\gapclause}{{\ensuremath{\%\lfg{Gap\hyph Clause}}}}
+\newcommand{\Gap}{{\ensuremath{\%\lfg{Gap}}}}
+\newcommand{\relpro}{{\ensuremath{\%\lfg{RelPro}}}}
+\newcommand{\saidthing}{\prd{said\hyph thing}}
+\newcommand{\partof}{\prd{part\hyph of}}
+\newcommand{\beans}{\prd{\null^*\idprd{bean}}}
+\newcommand{\ktb}{\prd{kick\hyph the\hyph bucket}}
+
+%% enumerate inside linguex
+\newcommand{\subexnums}{\let\oldalph=\alph\let\alph=\arabic} % Change subexamples to numbers
+\newcommand{\subexletters}{\global\let\alph=\oldalph} % Change back to letters
+
+%% Email address in url font
+\newcommand{\email}[1]{\href{mailto:#1}{\nolinkurl{#1}}}
+
+%% Fixing \hfill so it always applies
+\newcommand{\Hfill}{\null\hfill}
+
+%% Add to preamble to prevent line-breaking
+\newcommand{\nolinebreaks}{%
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000%
+}
+
+%% Newline that allows square brackets after it
+\newcommand{\nl}{\\\null}
+
+%% First mention of technical term
+\newcommand{\fm}[1]{\textsc{#1}}
+
+%% Greek letter shortcuts that work in text mode too
+\newcommand{\al}{\ensuremath{\alpha}}
+\newcommand{\alp}{\ensuremath{\alpha}}
+\newcommand{\sig}{\ensuremath{\sigma}}
+\newcommand{\thet}{\ensuremath{\theta}}
+\newcommand{\ph}{\ensuremath{\phi}}
+\newcommand{\lam}{\ensuremath{\lambda}}
+\newcommand{\bet}{\ensuremath{\beta}}
+\newcommand{\et}{\ensuremath{\eta}}
+
+%% Command for aligning diagrams etc. nicely with example numbers
+\makeatletter
+\def\evnup{\@ifnextchar[{\@evnup}{\@evnup[0pt]}}
+%
+\def\@evnup[#1]#2{\setbox1=\hbox{#2}%
+\dimen1=\ht1 \advance\dimen1 by -.5\baselineskip%
+\advance\dimen1 by -#1%
+\leavevmode\lower\dimen1\box1}
+\makeatother
+
+\newcommand{\diagram}[1]{\evnup{\includegraphics{#1}}}
+
+
+
+%%%%%% BIBTEX %%%%%%
+
+\newcommand{\citets}[2][]{\citeauthor{#2}'s (\citeyear[#1]{#2})}
+\newcommand{\citealts}[2][]{\citeauthor{#2}'s \citeyear[#1]{#2}}
+
+
+%%%%%% LINGUISTICS %%%%%%%
+
+%% Commands for nicely aligned primes; borrowed from qtree
+\newcommand{\0}{\ifmmode ^0\else \rlap{$^0$}\fi}
+\newcommand{\1}{\ifmmode '\else \rlap{$'$}\fi}%
+\newcommand{\2}{\ifmmode ''\else \rlap{$''$}\fi}%
+
+%% Prime for use in running text
+\newcommand{\pr}{\ensuremath{'}}
+
+%% \opt puts its argument in stretchy brackets
+\newcommand{\opt}[1]{\ensuremath{\left(#1\right)}}
+
+%% Shorter \textsc command
+\newcommand{\lfg}[1]{\textsc{#1}}
+
+%% Grammatical functions
+\newcommand{\gf}{\textsc{gf}}
+\newcommand{\subj}{\textsc{subj}}
+\newcommand{\obj}{\textsc{obj}}
+\newcommand{\adj}{\textsc{adj}}
+\newcommand{\pred}{\textsc{pred}}
+\newcommand{\comp}{\textsc{comp}}
+\newcommand{\xcomp}{\textsc{xcomp}}
+\newcommand{\xadj}{\textsc{xadj}}
+% \obl and \objth take 1 arg: the	subscript
+\newcommand{\objth}[1]{\textsc{obj}\ensuremath{_{\footnotesize\textsc{#1}}}}
+\newcommand{\obl}[1]{\textsc{obl}\ensuremath{_{\footnotesize\textsc{#1}}}}
+
+%% Discourse functions
+\newcommand{\df}{\textsc{df}}
+\newcommand{\focus}{\textsc{focus}}
+\newcommand{\topic}{\textsc{topic}}
+
+%% Some cases and tenses
+\newcommand{\nom}{\textsc{nom}}
+\newcommand{\acc}{\textsc{acc}}
+\newcommand{\dat}{\textsc{dat}}
+\newcommand{\past}{\textsc{past}}
+\newcommand{\pres}{\textsc{pres}}
+\newcommand{\future}{\textsc{future}}
+
+%% Miscellaneous grammatical stuff
+\newcommand{\caus}{\textsc{caus}}
+\newcommand{\applic}{\textsc{applic}}
+
+%% Underlined gaps for ellipsis/LDD etc.
+\newcommand{\gap}{\rule{0.5cm}{0.01cm}}
+
+%% Formatting things %%
+
+\newcommand{\norm}[1]{\textnormal{#1}}
+\newcommand{\hyph}{\norm{-}}
+\newcommand{\var}[1]{\textit{#1}}
+\newcommand{\prd}[1]{\ensuremath{\mathbf{#1}}}
+\newcommand{\idprd}[1]{\prd{#1\hyph id}}
+
+%% For sources of example sentences
+\newcommand{\source}[1]{{\footnotesize{(#1)}}}
+\newcommand{\urlsource}[1]{{\footnotesize{(\url{#1})}}}
+
+
+%% PSRS %%
+
+\newcommand{\goesto}{\ensuremath{\rightarrow}}
+
+%% \blank displays a large-ish maths space
+\newcommand{\blank}{\ensuremath{\quad}}
+
+%% For (LFG) PSRs with annotations/'decorations' underneath
+% \newcommand{\symb}[2]{
+%   \begin{tabular}[t]{c}
+%     \normalsize{#1}\\
+%     \footnotesize{#2}
+%   \end{tabular}}
+
+%% For multiline annotations (csn = C-structure node)
+\newcommand{\csn}[2]{%
+	 \begin{tabular}[t]{c}
+	 \protect{#1}\\
+	 \scalebox{0.9}{$\begin{array}{c}#2\end{array}$}
+		 \end{tabular}%
+	}
+
+% \newcommand{\csn}[2]{%
+%   \begin{tabular}[t]{c}
+%   \protect{#1}\\
+%   \protect{#2}
+%   \end{tabular}%
+% }
+
+\newcommand{\tblr}[3]{%
+\begin{tabular}[#1]{#2}
+#3
+\end{tabular}
+}
+
+\newcommand{\mathtab}[3]{%
+\ensuremath{%
+\begin{array}[#1]{#2}
+#3
+\end{array}%
+}
+}
+
+
+%% Tree drawing
+
+\newcommand{\labl}[1]{%
+\rlap{[\textnormal{#1}]}%
+}
+
+
+
+%% Glue stuff %%
+
+% General semantics stuff
+\newcommand{\tuple}[1]{{\ensuremath{\langle #1 \rangle}}}
+\newcommand{\denotes}[1]{\ifmmode \llbracket \norm{#1}\rrbracket\else $\llbracket$\norm{#1}$\rrbracket$\fi}
+\newcommand{\Land}{\land}
+\newcommand{\pt}{\prd{pt}}
+\newcommand{\agt}{\prd{ag}}
+\newcommand{\thm}{\prd{th}}
+\newcommand{\ben}{\prd{ben}}
+\newcommand{\goal}{\prd{goal}}
+\newcommand{\exper}{\prd{exp}}
+%
+\newcommand{\translation}[1]{$\denotes{\norm{#1}} = $}
+
+
+%% Proofs
+\newcommand{\prooftab}[1]{%
+\mathtab{b}{l}{#1}
+}
+
+\newcommand{\proofchunk}[1]{%
+\prooftab{#1}
+}
+
+\newcommand{\lex}[1]{\textbf{\denote{#1}}}
+
+%% Linear logic symbols
+\newcommand{\li}{\ensuremath{\multimap}}
+\newcommand{\tens}{\ensuremath{\otimes}}
+\newcommand{\means}{\ensuremath{\rightsquigarrow}}
+\newcommand{\thickrule}{\justifies \thickness=0.08em}
+
+%% S-structure abbrevs
+\newcommand{\rel}{\textsc{rel}}
+\newcommand{\argu}{\textsc{arg}}
+\newcommand{\ev}{\textsc{event}}
+
+%% LFG-specific things %%
+
+%% Ensures 'f-structure' etc. are not line-broken at the hyphen
+\newcommand{\struc}[1]{\mbox{#1-structure}}
+\newcommand{\func}[1]{\mbox{#1-function}}
+\newcommand{\fstruc}{\mbox{f-structure}}
+\newcommand{\cstruc}{\mbox{c-structure}}
+\newcommand{\sstruc}{\mbox{s-structure}}
+
+%% Up and down arrows
+\newcommand{\ua}{\ensuremath{\uparrow}}
+\newcommand{\da}{\ensuremath{\downarrow}}
+\newcommand{\ud}{\ensuremath{\ua\ =\ \da}}
+\newcommand{\uas}{\ensuremath{\ua_\sig}}
+\newcommand{\das}{\ensuremath{\da_\sig}}
+
+\newcommand{\tda}{\ensuremath{\Downarrow}}
+
+\newcommand{\up}[1]{\ensuremath{(\ua \textsc{#1})}}
+\newcommand{\ups}[1]{\ensuremath{(\ua \textsc{#1})_\sig}}
+\newcommand{\us}[1]{\ensuremath{(\ua_\sig \textsc{#1})}}
+
+\newcommand{\dn}[1]{\ensuremath{(\da \textsc{#1})}}
+\newcommand{\dns}[1]{\ensuremath{(\da \textsc{#1})_\sig}}
+\newcommand{\ds}[1]{\ensuremath{(\da_\sig \textsc{#1})}}
+
+\newcommand{\adjout}{{\ensuremath{(\adj \in \ua)}}}
+\newcommand{\Adjout}{{\ensuremath{(\adj \in \da)}}}
+
+%% Multi-line spanning disjunctions
+% \newenvironment{bigdisjunction}%
+% {%
+% \begin{tabular}{r>{&$\vert$}ll}$\{$&%
+% }%
+% {$\}$\end{tabular}}
+
+%% Table of GFs by features
+\newcommand{\gfs}{%
+\begin{tabular}[t]{l|ll}
+	      &	$-r$	&	$+r$			\\
+	\hline
+  $-o$	&	\subj	&	\obl{$\theta$}	\\
+  $+o$	&	\obj	&	\objth{$\theta$}
+\end{tabular}%
+}
