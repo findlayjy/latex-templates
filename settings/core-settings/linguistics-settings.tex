@@ -18,8 +18,14 @@
 \usepackage{prooftree}
 
 % Syntax trees
-\usepackage{mary-trees}
-\usepackage{tikz-qtree}
+% \usepackage{mary-trees}
+\usepackage{qtree}
+\usepackage[linguistics]{forest}
+\forestset{
+default preamble={
+for tree={s sep=10mm, inner sep=1, l=0pt}
+}
+}
 
 % OT tableaux
 \usepackage[round, medium]{OTtablx}		%For OT tableaux.

@@ -17,9 +17,12 @@
 \newcommand{\beans}{\prd{\null^*\idprd{bean}}}
 \newcommand{\ktb}{\prd{kick\hyph the\hyph bucket}}
 
-%% enumerate inside linguex
+%% linguex
+%% Use numbers instead of letters for subexamples
 \newcommand{\subexnums}{\let\oldalph=\alph\let\alph=\arabic} % Change subexamples to numbers
 \newcommand{\subexletters}{\global\let\alph=\oldalph} % Change back to letters
+%% Set ranges of examples without intermediary brackets [Only works for \L(L)ast and \N(N)ext commands, not for \ref. Why is this ?]
+% \newcommand{\refrange}[2]{{\renewcommand{\theExRBr}{}\ref{#1}}--{\renewcommand{\theExLBr}{}\ref{#2}}}
 
 %% Email address in url font
 \newcommand{\email}[1]{\href{mailto:#1}{\nolinkurl{#1}}}
@@ -105,20 +108,38 @@
 \newcommand{\focus}{\textsc{focus}}
 \newcommand{\topic}{\textsc{topic}}
 
-%% Some cases and tenses
+%% Cases
 \newcommand{\nom}{\textsc{nom}}
 \newcommand{\voc}{\textsc{voc}}
 \newcommand{\acc}{\textsc{acc}}
 \newcommand{\gen}{\textsc{gen}}
 \newcommand{\dat}{\textsc{dat}}
 \newcommand{\abl}{\textsc{abl}}
+\newcommand{\erg}{\textsc{erg}}
+\newcommand{\abs}{\textsc{abs}}
+\newcommand{\loc}{\textsc{loc}}
+\newcommand{\inst}{\textsc{inst}}
+
+%% Tenses
 \newcommand{\past}{\textsc{past}}
 \newcommand{\pres}{\textsc{pres}}
+\newcommand{\fut}{\textsc{fut}}
 \newcommand{\future}{\textsc{future}}
+
+%% Number
+\newcommand{\sg}{\textsc{sg}}
+\newcommand{\pl}{\textsc{pl}}
+
+%% Gender
+\newcommand{\masc}{\textsc{masc}}
+\newcommand{\fem}{\textsc{fem}}
+\newcommand{\neut}{\textsc{neut}}
 
 %% Miscellaneous grammatical stuff
 \newcommand{\caus}{\textsc{caus}}
 \newcommand{\applic}{\textsc{applic}}
+\newcommand{\wh}{\textit{wh}}
+\newcommand{\Wh}{\textit{Wh}}
 
 %% Underlined gaps for ellipsis/LDD etc.
 \newcommand{\gap}{\rule{0.5cm}{0.01cm}}
@@ -136,7 +157,7 @@
 \newcommand{\urlsource}[1]{{\footnotesize{(\url{#1})}}}
 
 
-%% PSRS %%
+%% Phrase structure rules %%
 
 \newcommand{\goesto}{\ensuremath{\rightarrow}}
 
