@@ -17,6 +17,9 @@
 \newcommand{\beans}{\prd{\null^*\idprd{bean}}}
 \newcommand{\ktb}{\prd{kick\hyph the\hyph bucket}}
 
+%% Subscript command for general use
+\newcommand{\sub}[1]{\ensuremath{_{#1}}}
+
 %% linguex
 %% Use numbers instead of letters for subexamples
 \newcommand{\subexnums}{\let\oldalph=\alph\let\alph=\arabic} % Change subexamples to numbers
@@ -40,9 +43,6 @@
 
 %% Newline that allows square brackets after it
 \newcommand{\nl}{\\\null}
-
-%% First mention of technical term
-\newcommand{\fm}[1]{\textsc{#1}}
 
 %% Greek letter shortcuts that work in text mode too
 \newcommand{\al}{\ensuremath{\alpha}}
@@ -86,9 +86,11 @@
 
 %% \opt puts its argument in stretchy brackets
 \newcommand{\opt}[1]{\ensuremath{\left(#1\right)}}
+% \newcommand{\opt}[1]{\ensuremath{\biggl(#1\biggr)}}
 
 %% Shorter \textsc command
 \newcommand{\lfg}[1]{\textsc{#1}}
+\newcommand{\tsc}[1]{\textsc{#1}}
 
 %% Grammatical functions
 \newcommand{\gf}{\textsc{gf}}
@@ -176,7 +178,33 @@
 
 %% For multiline annotations (csn = C-structure node)
 \newcommand{\csn}[2]{%
+\setlength\tabcolsep{1pt}
+	 \begin{tabular}[c]{c}
+	 \scalebox{0.9}{$\begin{array}{c}#2\end{array}$}\\
+	 \protect{#1}
+		 \end{tabular}%
+	}
+
+\newcommand{\symb}[2]{%
+\setlength\tabcolsep{1pt}
 	 \begin{tabular}[t]{c}
+	 \protect{#1}\\
+	 \scalebox{0.9}{$\begin{array}{c}#2\end{array}$}
+		 \end{tabular}%
+	}
+
+\newcommand{\optsymb}[2]{%
+\setlength\tabcolsep{1pt}
+\evnup{\opt{
+	 \begin{tabular}[c]{c}
+	 \protect{#1}\\
+	 \scalebox{0.9}{$\begin{array}{c}#2\end{array}$}
+		 \end{tabular}%
+	}}}
+
+\newcommand{\symbx}[2]{%
+\setlength\tabcolsep{1pt}
+	 \begin{tabular}[c]{c}
 	 \protect{#1}\\
 	 \scalebox{0.9}{$\begin{array}{c}#2\end{array}$}
 		 \end{tabular}%
@@ -237,7 +265,7 @@
 \prooftab{#1}
 }
 
-\newcommand{\lex}[1]{\textbf{\denote{#1}}}
+\newcommand{\lex}[1]{\textbf{\denotes{#1}}}
 
 %% Linear logic symbols
 \newcommand{\li}{\ensuremath{\multimap}}
