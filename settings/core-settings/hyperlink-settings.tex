@@ -3,7 +3,7 @@
 %================================%
 
 \usepackage[hyphens]{url}
-\urlstyle{tt} % tt,rm,sf,same
+\urlstyle{rm} % tt,rm,sf,same
 
 \usepackage[breaklinks,hidelinks]{hyperref}	% Allows links (email addresses and URLs)
 % Commands: \url{ADDRESS} -- displays ADDRESS as link in URL font
@@ -11,3 +11,12 @@
 %			\href{ADDRESS}{TEXT} -- displays TEXT as a link to ADDRESS
 
 % \usepackage[hyphenbreaks]{breakurl}
+%
+\definecolor{hlinkcolor}{rgb}{.0,.2,.4}
+%
+\hypersetup{%
+colorlinks=true,%
+urlcolor=hlinkcolor,%
+linkcolor = black,%
+citecolor = black%
+}
