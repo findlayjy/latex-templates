@@ -4,6 +4,16 @@
 \newcommand{\cmark}{\ding{51}}
 \newcommand{\xmark}{\ding{55}}
 
+% Responsive @ symbol (requires marvosym package)
+\newcommand{\at}{%
+  \relax%
+  \ifmmode%
+  $\MVAt$%
+  \else%
+  \MVAt%
+  \fi%
+}
+
 %% Abbreviations
 \newcommand{\definedas}{\ensuremath{\coloneqq}}
 \newcommand{\andor}{and\slash or}
@@ -77,9 +87,9 @@
 %%%%%% LINGUISTICS %%%%%%%
 
 %% Commands for nicely aligned primes; borrowed from qtree
-\newcommand{\0}{\ifmmode ^0\else \rlap{$^0$}\fi}
-\newcommand{\1}{\ifmmode '\else \rlap{$'$}\fi}%
-\newcommand{\2}{\ifmmode ''\else \rlap{$''$}\fi}%
+% \newcommand{\0}{\ifmmode ^0\else \rlap{$^0$}\fi}
+% \newcommand{\1}{\ifmmode '\else \rlap{$'$}\fi}%
+% \newcommand{\2}{\ifmmode ''\else \rlap{$''$}\fi}%
 
 %% Prime for use in running text
 \newcommand{\pr}{\ensuremath{'}}
@@ -101,9 +111,9 @@
 \newcommand{\comp}{\textsc{comp}}
 \newcommand{\xcomp}{\textsc{xcomp}}
 \newcommand{\xadj}{\textsc{xadj}}
-% \obl and \objth take 1 arg: the	subscript
-\newcommand{\objth}[1]{\textsc{obj}\ensuremath{_{\footnotesize\textsc{#1}}}}
-\newcommand{\obl}[1]{\textsc{obl}\ensuremath{_{\footnotesize\textsc{#1}}}}
+% \obl and \objth take an optional argument: the subscript (defaults to θ if nothing given)
+\newcommand{\objth}[1][\ensuremath{\theta}]{\textsc{obj}\ensuremath{_{\footnotesize\textsc{#1}}}}
+\newcommand{\obl}[1][\ensuremath{\theta}]{\textsc{obl}\ensuremath{_{\footnotesize\textsc{#1}}}}
 
 %% Discourse functions
 \newcommand{\df}{\textsc{df}}
@@ -144,10 +154,9 @@
 \newcommand{\Wh}{\textit{Wh}}
 
 %% Underlined gaps for ellipsis/LDD etc.
-\newcommand{\gap}{\rule{0.5cm}{0.01cm}}
+\newcommand{\gap}[1][0.5cm]{\rule{#1}{0.01cm}}
 
 %% Formatting things %%
-
 \newcommand{\norm}[1]{\textnormal{#1}}
 \newcommand{\hyph}{\norm{-}}
 \newcommand{\var}[1]{\textit{#1}}
@@ -244,7 +253,17 @@
 
 % General semantics stuff
 \newcommand{\tuple}[1]{{\ensuremath{\langle #1 \rangle}}}
-\newcommand{\denotes}[1]{\ifmmode \llbracket \norm{#1}\rrbracket\else $\llbracket$\norm{#1}$\rrbracket$\fi}
+\newcommand{\denotes}[1]{\ensuremath{\llbracket \textnormal{#1} \rrbracket}}
+% Brian Buccola's neat solution that suppresses whitespace when optional arguments are not present.
+% \usepackage{etoolbox}
+% \newcommand*\sv[2][]{%
+%   \ensuremath{%
+%     \llbracket
+%     \ifblank{#2}{\;\cdot\;}{#2}
+%     \rrbracket
+%     \ifblank{#1}{}{^{#1}}
+%   }
+% }
 \newcommand{\Land}{\land}
 \newcommand{\pt}{\prd{pt}}
 \newcommand{\agt}{\prd{ag}}
@@ -253,7 +272,7 @@
 \newcommand{\goal}{\prd{goal}}
 \newcommand{\exper}{\prd{exp}}
 %
-\newcommand{\translation}[1]{$\denotes{\norm{#1}} = $}
+\newcommand{\translation}[1]{\ensuremath{\denotes{\norm{#1}} = }}
 
 
 %% Proofs
@@ -273,12 +292,12 @@
 \newcommand{\means}{\ensuremath{\rightsquigarrow}}
 \newcommand{\thickrule}{\justifies \thickness=0.08em}
 
+%% LFG-specific things %%
+
 %% S-structure abbrevs
 \newcommand{\rel}{\textsc{rel}}
 \newcommand{\argu}{\textsc{arg}}
 \newcommand{\ev}{\textsc{event}}
-
-%% LFG-specific things %%
 
 %% Ensures 'f-structure' etc. are not line-broken at the hyphen
 \newcommand{\struc}[1]{\mbox{#1-structure}}

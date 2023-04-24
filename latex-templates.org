@@ -1,0 +1,538 @@
+#+TITLE: LaTeX templates master file
+
+* Info
+This file is where I centralise my settings -- when it is tangled, it produces a set of templates, each of which contains all of the settings spelled out. This makes each file independent and standalone, able to be tinkered with without going into lots of different files. This file is just my defaults.
+
+~jyf-macros.tex~ shouldn't be spelled out tho -- it's too long. That can be copied by the =new-latex= commands? -- No, keep it in this repo and allow =latexmkrc= to find it there.
+
+* Settings
+Gathering all the below settings in one place:
+#+NAME: standard-settings
+#+begin_src latex :noweb yes
+<<font-settings>>
+<<layout-settings>>
+<<graphics-settings>>
+<<symbol-settings>>
+<<bib-settings>>
+<<hyperlink-settings>>
+<<linguistics-settings>>
+#+end_src
+** Fonts
+#+NAME: font-settings
+#+begin_src latex
+%===========%
+%   Fonts   %
+%===========%
+
+\usepackage[T1]{fontenc} % For more font encoding options
+\usepackage{lmodern} % For better quality fonts
+\usepackage[normalem]{ulem} % For underlining (use \uline{...})
+
+
+#+end_src
+
+*** Notes
+**** ulem package
+Without the 'normalem' option, \emph{...} = underlining not italics
+
+Other commands:
+- Underline: \uline{...}.
+- Double underline: \uuline{...}
+- Dashed underline: \dashuline{...}
+- Dotted underline: \dotuline{...}
+- For strikeout: cmd = \sout{...}
+- To add a wavy underline, use \uwave{...}.
+- For a strike-out (strikethrough), use \sout{...}.
+- For a slash through each individual character \xout{...}.
+
+*** Legacy code
+#+begin_src latex
+\usepackage{charter} % Another font package
+#+end_src
+
+** Layout
+#+NAME: layout-settings
+#+begin_src latex
+%===============%
+%    Layout     %
+%===============%
+
+\usepackage{booktabs} % Better quality tables.
+\usepackage{multirow} % Tabular cells spanning multiple rows
+\usepackage{pbox} % Intelligent variable width parboxes
+\usepackage[font=small, labelfont=bf]{caption} % Caption formatting
+
+\renewcommand\refname{References} % Change the name of the bibliography
+
+% My preferred formatting of the quote environment
+\renewenvironment{quote}
+               {\list{}{\rightmargin\leftmargin}%
+                \item\relax\small}
+               {\endlist}
+
+\frenchspacing % Single spacing after periods
+
+#+end_src
+
+*** Notes
+=booktabs= commands:
+- \toprule
+- \midrule
+- \cmidrule
+- \bottomrule
+** TikZ
+#+NAME: tikz-settings
+#+begin_src latex
+%====================%
+%   TikZ settings    %
+%====================%
+
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+
+#+end_src
+
+** Graphics/colours/TikZ
+#+NAME: graphics-settings
+#+begin_src latex
+%============================%
+%   Graphics and diagrams    %
+%============================%
+
+\usepackage{graphicx}
+\usepackage[dvipsnames]{xcolor} % for handling colours; allows referring to them by name
+
+<<tikz-settings>>
+#+end_src
+
+*** Legacy code
+#+begin_src latex
+% These are used for some tree-drawing packages, but require latex > dvips > ps2pdf rather than pdflatex
+\usepackage{pstricks}
+\usepackage{pst-node}
+#+end_src
+
+** Symbols
+#+NAME:symbol-settings
+#+begin_src latex
+%=============%
+%   Symbols   %
+%=============%
+
+\usepackage{latexsym,amsmath,amssymb,wasysym}
+% Also loads amsfonts.
+\usepackage{marvosym} % Provies \MVAt
+\usepackage{phonetic} % For \riota (turned iota)
+\usepackage{centernot} % Properly centres \not command on following argument
+\usepackage{mathtools} % Provides \coloneqq
+\usepackage{stmaryrd} % Various symbols including semantic interpretation brackets \llbracket and \rrbracket
+
+#+end_src
+
+*** Notes
+- ~\mathbb{...}~ for blackboard bold.
+
+** Bibliography
+#+NAME: bib-settings
+#+begin_src latex
+%=================%
+%   Bibliography  %
+%=================%
+
+\usepackage{natbib} % Author-year citations
+\bibpunct{(}{)}{;}{a}{}{,}
+\setcitestyle{notesep={:\ }} % Changes separator between year and page to colon
+
+#+end_src
+
+*** Notes
+Arguments for \bibpunct:
+- {opening bracket style}
+- {closing bracket style}
+- {punctuation between multiple citations}
+- {n=numerical, s=superscript numerical, a=author year}
+- {punctuation btwn author and year}
+- {punctuation between years with shared author}
+
+*** Legacy code
+#+begin_src latex
+\usepackage[natbibapa]{apacite} % APA citation style
+#+end_src
+
+** Hyperlinks
+#+NAME: hyperlink-settings
+#+begin_src latex
+%==============%
+%  Hyperlinks  %
+%==============%
+
+#+end_src
+
+*** Notes
+=hyperref= package commands:
+ - \url{ADDRESS} -- displays ADDRESS as link in URL font
+ - \nolinkurl{ADDRESS} -- displays ADDRESS in URL font, but not as a hyperlink
+ - \href{ADDRESS}{TEXT} -- displays TEXT as a link to ADDRESS
+
+*** Legacy code
+#+begin_src latex
+\usepackage[hyphenbreaks]{breakurl} % Old package for making long URLs linebreak nicely. The breaklinks option for hyperref does a good enough job though?
+#+end_src
+
+** Linguistics
+#+NAME: linguistics-settings
+#+begin_src latex
+%==================%
+%   Linguistics    %
+%==================%
+
+% IPA
+\usepackage{tipa}
+
+% OT tableaux
+% \usepackage[round, medium]{OTtablx}		%For OT tableaux.
+% \usepackage{pifont} % for pointing hand
+
+% AVMs
+\usepackage{avm}
+\avmfont{\sc}
+% \avmoptions{active} % Avoid having to type backslashes before every square bracket, but with limitations (e.g. doesn't work when the avm environment is inside the argument of another command)
+
+% Numbered examples
+\usepackage{linguex}
+\let\eachwordtwo=\it % Italicises second line of gloss
+\renewcommand{\firstrefdash}{} % Removes dash between example number and letter in references
+
+% Proofs
+\usepackage{prooftree}
+
+% Syntax trees
+% \usepackage{qtree}
+% \qtreecenterfalse
+\usepackage[linguistics]{forest}
+\forestset{
+default preamble={%
+for tree={s sep=5mm, inner sep=1, l=0pt}}
+    }
+
+#+end_src
+
+*** Legacy code
+#+begin_src latex
+\usepackage{mary-trees} % Mary's tree-drawing macros which use pstricks
+
+% The LangSci AVM package is still in development, and I don't like the output as much as Chris Manning's avm.sty
+\usepackage{langsci-avm}
+\avmsetup{values=\scshape,columnsep=0.5ex,stretch=0.9,delimfall=0pt,delimfactor=1000}
+
+#+end_src
+*** TODO Switch to expex for examle numbering?
+*** TODO Work up LFG and Glue packages to include some of these packages + nicer commands for them
+
+* Templates
+** Plain
+#+NAME: plain-settings
+#+begin_src latex :noweb yes
+<<font-settings>>
+<<layout-settings>>
+\usepackage[margin=1in]{geometry}
+
+<<graphics-settings>>
+<<bib-settings>>
+<<hyperlink-settings>>
+#+end_src
+
+#+begin_src latex :noweb yes :tangle plain-template.tex
+\documentclass[
+11pt,
+draft,
+a4paper
+]{article}
+
+%===============================================================================
+%                                 Preamble                                     %
+%===============================================================================
+
+<<plain-settings>>
+
+\usepackage{lipsum}
+
+%==========%
+%  Macros  %
+%==========%
+
+\input{jyf-macros}
+
+%===========%
+%   Title   %
+%===========%
+
+\title{Title over two \\ lines}
+\author{Jamie Y. Findlay\\\small University of Oslo\\\small\email{jamie.findlay@iln.uio.no}}
+\date{}
+
+%===============================================================================
+%                               Document start                                 %
+%===============================================================================
+
+\begin{document}
+
+\maketitle
+
+\section{Section}
+
+\lipsum
+
+%===================%
+%   Bibliography    %
+%===================%
+
+\bibliographystyle{jyf-sp} % My modified version of the Semantics & Pragmatics bibliography style
+\bibliography{linguistics}
+
+\end{document}
+#+end_src
+
+** Article
+#+NAME: article-settings
+#+begin_src latex :noweb yes
+<<font-settings>>
+\usepackage[sc,osf]{mathpazo} % Palatino font, w/ smallcaps & old-style figures
+% \usepackage{times} % Times New Roman font
+
+<<layout-settings>>
+<<graphics-settings>>
+\usepackage{tikz}
+
+<<symbol-settings>>
+<<bib-settings>>
+<<hyperlink-settings>>
+% \usepackage[hyphens]{url} % hyperref loads this anyway, but without the hyphens option, which helps with linebreaking
+\usepackage[breaklinks,hidelinks]{hyperref} % hidelinks avoids boxes around links
+\urlstyle{rm} % tt,rm,sf,same
+\definecolor{hlinkcolor}{rgb}{.0,.2,.4} % A nice dark blue
+%
+\hypersetup{%
+colorlinks=true,%
+urlcolor=hlinkcolor,%
+linkcolor = black,% For internal links
+citecolor = black% For citation links
+}
+
+<<linguistics-settings>>
+#+end_src
+
+#+begin_src latex :noweb yes :tangle article-template.tex
+\documentclass[
+11pt,
+draft,
+a4paper
+]{article}
+
+%===============================================================================
+%                                 Preamble                                     %
+%===============================================================================
+
+<<article-settings>>
+
+\usepackage{lipsum}
+
+%==========%
+%  Macros  %
+%==========%
+
+\input{jyf-macros}
+
+%===========%
+%   Title   %
+%===========%
+
+\title{Title over two \\ lines}
+\author{Jamie Y. Findlay\\\small University of Oslo\\\small\email{jamie.findlay@iln.uio.no}}
+\date{}
+
+%===============================================================================
+%                               Document start                                 %
+%===============================================================================
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}%
+This is an abstract: \lipsum[1]
+\end{abstract}
+
+\section{Section}
+
+\lipsum
+
+%===================%
+%   Bibliography    %
+%===================%
+
+\bibliographystyle{jyf-sp} % My modified version of the Semantics & Pragmatics bibliography style
+\bibliography{linguistics}
+
+\end{document}
+
+#+end_src
+** Conference slides
+#+NAME: conference-presentation-settings
+#+begin_src latex :noweb yes
+\usetheme[%
+numbering = fraction % none, counter (def)
+% , section page = none % simple, progressbar (def)
+%, progressbar = frametitle % none (def), head, foot
+% , background = dark% light (def)
+, block = fill % transparent (def)
+]{metropolis}
+
+\definecolor{nord.bg}{HTML}{2E3440}
+% \definecolor{nord.fg}{HTML}{D8DEE9}
+\definecolor{nord.fg}{HTML}{E5E9F0}
+% \definecolor{nord.fg}{HTML}{ECEFF4}
+\definecolor{nord.alert}{HTML}{5E81AC}
+
+\setbeamercolor{normal text}{fg=nord.bg, bg=nord.fg}
+\setbeamercolor{alerted text}{fg=nord.alert}
+
+<<font-settings>>
+\usepackage[sfdefault]{cabin}
+
+<<layout-settings>>
+%============================%
+%   Graphics and diagrams    %
+%============================%
+
+\usepackage{graphicx}
+
+<<tikz-settings>>
+<<symbol-settings>>
+<<bib-settings>>
+%==============%
+%  Hyperlinks  %
+%==============%
+
+\urlstyle{same} % tt,rm,sf,same
+
+<<linguistics-settings>>
+#+end_src
+
+#+begin_src latex :noweb yes :tangle conference-presentation-template.tex
+\PassOptionsToPackage{dvipsnames}{xcolor}
+\documentclass[
+11pt,
+%handout,
+]{beamer}
+
+%===============================================================================
+%                                 Preamble                                     %
+%===============================================================================
+
+<<conference-presentation-settings>>
+
+%==========%
+%  Macros  %
+%==========%
+
+\input{jyf-macros}
+
+%===========%
+%   Title   %
+%===========%
+
+\title{Long title}
+
+\author{Jamie Y. Findlay}
+\institute[]{Department of Linguistics and Scandinavian Studies, University of Oslo}
+\date{01 Jan 2000}
+\titlegraphic{\includegraphics[width=2cm]{uio-crest}}
+
+%===============================================================================
+%                               Document start                                 %
+%===============================================================================
+
+\begin{document}
+
+\begin{frame}[plain]
+  \titlepage
+  % \begin{tikzpicture}[overlay, remember picture]
+  %   \node[above right=0.8cm and .8cm of current page.south west] {\includegraphics[width=2cm]{uio-crest}};
+  % \end{tikzpicture}
+\end{frame}
+
+\section{Fonts and layout}
+\begin{frame}{Fonts and layout}
+
+  Here is some text: \textbf{bold}, \emph{italic}, \textsc{small caps}, \alert{alert}
+
+  \begin{block}{Basic block}
+    With some text
+  \end{block}
+
+  \begin{alertblock}{Alert block}
+    With some text
+  \end{alertblock}
+
+  \begin{exampleblock}{Example block}
+    With some text
+  \end{exampleblock}
+
+\end{frame}
+
+\begin{frame}[standout]
+  This is a standout frame, to highlight an important message.
+\end{frame}
+
+\section{Syntax}
+
+\begin{frame}
+  \frametitle{Syntax}
+  Here is a tree:
+
+  \ex.
+  \begin{forest}
+    [S [NP [Adam]] [VP [V [loves] ] [NP [Steve]]]]
+  \end{forest}
+
+\end{frame}
+
+\section{Semantics}
+
+\begin{frame}
+  \frametitle{Semantics}
+  Here's a semantic expression:
+
+  \ex.
+  $\denotes{loves} = \lambda x \lambda y. \exists e[\prd{love}(e) \land \prd{experiencer}(e,x) \land \prd{source}(e,y)] : e_{\up{subj}} \li e_{\up{obj}} \li t$
+
+\end{frame}
+
+%===================%
+%   Bibliography    %
+%===================%
+
+\bibliographystyle{jyf-sp} % My modified version of the Semantics & Pragmatics bibliography style
+\bibliography{linguistics}
+
+%====================%
+%   Backup slides    %
+%====================%
+
+\appendix
+
+\begin{frame}
+  \frametitle{Backup slide}
+
+\end{frame}
+
+
+\end{document}
+
+#+end_src
+
+* Emacs local variables
+# Local Variables:
+# after-save-hook: org-babel-tangle
+# End:
