@@ -1,22 +1,15 @@
 #+TITLE: LaTeX templates master file
 
 * Info
-This file is where I centralise my settings -- when it is tangled, it produces a set of templates, each of which contains all of the settings spelled out. This makes each file independent and standalone, able to be tinkered with without going into lots of different files. This file is just my defaults.
+This file is where I centralise my settings -- when it is tangled, it produces a
+set of templates, each of which contains all of the settings spelled out. This
+makes each file independent and standalone, able to be tinkered with without
+going into lots of different files. This file is just my defaults.
 
-~jyf-macros.tex~ shouldn't be spelled out tho -- it's too long. That can be copied by the =new-latex= commands? -- No, keep it in this repo and allow =latexmkrc= to find it there.
+~jyf-macros.tex~ shouldn't be spelled out tho -- it's too long. I keep it in this
+repo and allow =latexmkrc= to find it there.
 
 * Settings
-Gathering all the below settings in one place:
-#+NAME: standard-settings
-#+begin_src latex :noweb yes
-<<font-settings>>
-<<layout-settings>>
-<<graphics-settings>>
-<<symbol-settings>>
-<<bib-settings>>
-<<hyperlink-settings>>
-<<linguistics-settings>>
-#+end_src
 ** Fonts
 #+NAME: font-settings
 #+begin_src latex
@@ -72,6 +65,7 @@ Other commands:
 
 \frenchspacing % Single spacing after periods
 
+
 #+end_src
 
 *** Notes
@@ -88,11 +82,12 @@ Other commands:
 %====================%
 
 \usepackage{tikz}
-\usetikzlibrary{positioning}
+\usetikzlibrary{positioning,tikzmark,calc,arrows.meta}
+
 
 #+end_src
 
-** Graphics/colours/TikZ
+** Graphics and diagrams
 #+NAME: graphics-settings
 #+begin_src latex
 %============================%
@@ -102,7 +97,7 @@ Other commands:
 \usepackage{graphicx}
 \usepackage[dvipsnames]{xcolor} % for handling colours; allows referring to them by name
 
-<<tikz-settings>>
+
 #+end_src
 
 *** Legacy code
@@ -127,6 +122,7 @@ Other commands:
 \usepackage{mathtools} % Provides \coloneqq
 \usepackage{stmaryrd} % Various symbols including semantic interpretation brackets \llbracket and \rrbracket
 
+
 #+end_src
 
 *** Notes
@@ -142,6 +138,7 @@ Other commands:
 \usepackage{natbib} % Author-year citations
 \bibpunct{(}{)}{;}{a}{}{,}
 \setcitestyle{notesep={:\ }} % Changes separator between year and page to colon
+
 
 #+end_src
 
@@ -165,6 +162,17 @@ Arguments for \bibpunct:
 %==============%
 %  Hyperlinks  %
 %==============%
+
+\usepackage[breaklinks,hidelinks]{hyperref} % hidelinks avoids boxes around links
+\urlstyle{rm} % tt,rm,sf,same
+\definecolor{hlinkcolor}{rgb}{.0,.2,.4} % A nice dark blue
+%
+\hypersetup{%
+colorlinks=true,%
+urlcolor=hlinkcolor,%
+linkcolor = black,% For internal links
+citecolor = black% For citation links
+}
 
 #+end_src
 
@@ -215,6 +223,7 @@ default preamble={%
 for tree={s sep=5mm, inner sep=1, l=0pt}}
     }
 
+
 #+end_src
 
 *** Legacy code
@@ -226,19 +235,18 @@ for tree={s sep=5mm, inner sep=1, l=0pt}}
 \avmsetup{values=\scshape,columnsep=0.5ex,stretch=0.9,delimfall=0pt,delimfactor=1000}
 
 #+end_src
-*** TODO Switch to expex for examle numbering?
+*** TODO Switch to expex for example numbering?
 *** TODO Work up LFG and Glue packages to include some of these packages + nicer commands for them
-
 * Templates
 ** Plain
 #+NAME: plain-settings
 #+begin_src latex :noweb yes
 <<font-settings>>
+\usepackage{times}
 <<layout-settings>>
 \usepackage[margin=1in]{geometry}
 
 <<graphics-settings>>
-<<bib-settings>>
 <<hyperlink-settings>>
 #+end_src
 
@@ -283,13 +291,6 @@ a4paper
 
 \lipsum
 
-%===================%
-%   Bibliography    %
-%===================%
-
-\bibliographystyle{jyf-sp} % My modified version of the Semantics & Pragmatics bibliography style
-\bibliography{linguistics}
-
 \end{document}
 #+end_src
 
@@ -307,18 +308,6 @@ a4paper
 <<symbol-settings>>
 <<bib-settings>>
 <<hyperlink-settings>>
-% \usepackage[hyphens]{url} % hyperref loads this anyway, but without the hyphens option, which helps with linebreaking
-\usepackage[breaklinks,hidelinks]{hyperref} % hidelinks avoids boxes around links
-\urlstyle{rm} % tt,rm,sf,same
-\definecolor{hlinkcolor}{rgb}{.0,.2,.4} % A nice dark blue
-%
-\hypersetup{%
-colorlinks=true,%
-urlcolor=hlinkcolor,%
-linkcolor = black,% For internal links
-citecolor = black% For citation links
-}
-
 <<linguistics-settings>>
 #+end_src
 
@@ -377,6 +366,8 @@ This is an abstract: \lipsum[1]
 \end{document}
 
 #+end_src
+** Handout
+(Look into tufte-latex)
 ** Conference slides
 #+NAME: conference-presentation-settings
 #+begin_src latex :noweb yes
@@ -401,6 +392,9 @@ numbering = fraction % none, counter (def)
 \usepackage[sfdefault]{cabin}
 
 <<layout-settings>>
+\usepackage{appendixnumberbeamer}
+
+
 %============================%
 %   Graphics and diagrams    %
 %============================%
@@ -442,7 +436,7 @@ numbering = fraction % none, counter (def)
 %   Title   %
 %===========%
 
-\title{Long title}
+\title{Title}
 
 \author{Jamie Y. Findlay}
 \institute[]{Department of Linguistics and Scandinavian Studies, University of Oslo}
@@ -455,7 +449,7 @@ numbering = fraction % none, counter (def)
 
 \begin{document}
 
-\begin{frame}[plain]
+\begin{frame}[plain,noframenumbering]
   \titlepage
   % \begin{tikzpicture}[overlay, remember picture]
   %   \node[above right=0.8cm and .8cm of current page.south west] {\includegraphics[width=2cm]{uio-crest}};
@@ -531,7 +525,144 @@ numbering = fraction % none, counter (def)
 \end{document}
 
 #+end_src
+** Lecture slides
+#+NAME: lecture-settings
+#+begin_src latex :noweb yes
+\usetheme[secheader]{Boadilla}
+\setbeamercovered{transparent}
 
+% \resetcounteronoverlays{exx}
+
+\beamertemplatenavigationsymbolsempty
+
+<<font-settings>>
+\usepackage[sfdefault]{cabin}
+
+<<layout-settings>>
+%============================%
+%   Graphics and diagrams    %
+%============================%
+
+\usepackage{graphicx}
+
+<<tikz-settings>>
+<<symbol-settings>>
+<<bib-settings>>
+%==============%
+%  Hyperlinks  %
+%==============%
+
+\urlstyle{same} % tt,rm,sf,same
+
+<<linguistics-settings>>
+#+end_src
+
+#+begin_src latex :noweb yes :tangle lecture-template.tex
+\PassOptionsToPackage{dvipsnames}{xcolor}
+\documentclass[
+11pt,
+%handout,
+]{beamer}
+
+%===============================================================================
+%                                 Preamble                                     %
+%===============================================================================
+
+<<lecture-settings>>
+
+%==========%
+%  Macros  %
+%==========%
+
+\input{jyf-macros}
+
+\newcommand{\myblue}{blue!70!black}
+
+\newcommand{\keyterm}[1]{%
+\tikz[baseline=(word.base),anchor=text]{%
+% \tikz{%
+  \node[fill=gray!10, thick, rounded corners, draw=\myblue] (word) {\textsc{\textcolor{\myblue}{#1}}};
+  }%
+}
+
+
+%===========%
+%   Title   %
+%===========%
+
+\title{Title}
+
+\author{Jamie Y. Findlay}
+\institute[]{Department of Linguistics and Scandinavian Studies, University of Oslo}
+\date{01 Jan 2000}
+\titlegraphic{\includegraphics[width=2cm]{uio-crest}}
+
+%===============================================================================
+%                               Document start                                 %
+%===============================================================================
+
+\begin{document}
+
+\begin{frame}[plain,no]
+  \titlepage
+  % \begin{tikzpicture}[overlay, remember picture]
+  %   \node[above right=0.8cm and .8cm of current page.south west] {\includegraphics[width=2cm]{uio-crest}};
+  % \end{tikzpicture}
+\end{frame}
+
+\section{Fonts and layout}
+\begin{frame}{Fonts and layout}
+
+  Here is some text: \textbf{bold}, \emph{italic}, \textsc{small caps}, \alert{alert}, and here is a \keyterm{key term}
+
+  \begin{block}{Basic block}
+    With some text
+  \end{block}
+
+  \begin{alertblock}{Alert block}
+    With some text
+  \end{alertblock}
+
+  \begin{exampleblock}{Example block}
+    With some text
+  \end{exampleblock}
+
+\end{frame}
+
+\section{Syntax}
+
+\begin{frame}
+  \frametitle{Syntax}
+  Here is a tree:
+
+  \ex.
+  \begin{forest}
+    [S [NP [Adam]] [VP [V [loves] ] [NP [Steve]]]]
+  \end{forest}
+
+\end{frame}
+
+\section{Semantics}
+
+\begin{frame}
+  \frametitle{Semantics}
+  Here's a semantic expression:
+
+  \ex.
+  $\denotes{loves} = \lambda x \lambda y. \exists e[\prd{love}(e) \land \prd{experiencer}(e,x) \land \prd{source}(e,y)] : e_{\up{subj}} \li e_{\up{obj}} \li t$
+
+\end{frame}
+
+%===================%
+%   Bibliography    %
+%===================%
+
+\bibliographystyle{jyf-sp} % My modified version of the Semantics & Pragmatics bibliography style
+\bibliography{linguistics}
+
+\end{document}
+
+#+end_src
 * Emacs local variables
 # Local Variables:
 # after-save-hook: org-babel-tangle

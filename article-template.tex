@@ -4,33 +4,143 @@ draft,
 a4paper
 ]{article}
 
-\input{settings/standard-settings}
-\input{settings/article-settings}
-
-%% Fonts
-\usepackage{times}		% Times font
-%\usepackage[sc,osf]{mathpazo}% Palatino font, w/ smallcaps & old-style figures
+%===============================================================================
+%                                 Preamble                                     %
+%===============================================================================
 
 %===========%
-%   Macros  %
+%   Fonts   %
 %===========%
+
+\usepackage[T1]{fontenc} % For more font encoding options
+\usepackage{lmodern} % For better quality fonts
+\usepackage[normalem]{ulem} % For underlining (use \uline{...})
+
+
+\usepackage[sc,osf]{mathpazo} % Palatino font, w/ smallcaps & old-style figures
+% \usepackage{times} % Times New Roman font
+
+%===============%
+%    Layout     %
+%===============%
+
+\usepackage{booktabs} % Better quality tables.
+\usepackage{multirow} % Tabular cells spanning multiple rows
+\usepackage{pbox} % Intelligent variable width parboxes
+\usepackage[font=small, labelfont=bf]{caption} % Caption formatting
+
+\renewcommand\refname{References} % Change the name of the bibliography
+
+% My preferred formatting of the quote environment
+\renewenvironment{quote}
+               {\list{}{\rightmargin\leftmargin}%
+                \item\relax\small}
+               {\endlist}
+
+\frenchspacing % Single spacing after periods
+
+
+%============================%
+%   Graphics and diagrams    %
+%============================%
+
+\usepackage{graphicx}
+\usepackage[dvipsnames]{xcolor} % for handling colours; allows referring to them by name
+
+
+\usepackage{tikz}
+
+%=============%
+%   Symbols   %
+%=============%
+
+\usepackage{latexsym,amsmath,amssymb,wasysym}
+% Also loads amsfonts.
+\usepackage{marvosym} % Provies \MVAt
+\usepackage{phonetic} % For \riota (turned iota)
+\usepackage{centernot} % Properly centres \not command on following argument
+\usepackage{mathtools} % Provides \coloneqq
+\usepackage{stmaryrd} % Various symbols including semantic interpretation brackets \llbracket and \rrbracket
+
+
+%=================%
+%   Bibliography  %
+%=================%
+
+\usepackage{natbib} % Author-year citations
+\bibpunct{(}{)}{;}{a}{}{,}
+\setcitestyle{notesep={:\ }} % Changes separator between year and page to colon
+
+
+%==============%
+%  Hyperlinks  %
+%==============%
+
+\usepackage[breaklinks,hidelinks]{hyperref} % hidelinks avoids boxes around links
+\urlstyle{rm} % tt,rm,sf,same
+\definecolor{hlinkcolor}{rgb}{.0,.2,.4} % A nice dark blue
+%
+\hypersetup{%
+colorlinks=true,%
+urlcolor=hlinkcolor,%
+linkcolor = black,% For internal links
+citecolor = black% For citation links
+}
+
+%==================%
+%   Linguistics    %
+%==================%
+
+% IPA
+\usepackage{tipa}
+
+% OT tableaux
+% \usepackage[round, medium]{OTtablx}		%For OT tableaux.
+% \usepackage{pifont} % for pointing hand
+
+% AVMs
+\usepackage{avm}
+\avmfont{\sc}
+% \avmoptions{active} % Avoid having to type backslashes before every square bracket, but with limitations (e.g. doesn't work when the avm environment is inside the argument of another command)
+
+% Numbered examples
+\usepackage{linguex}
+\let\eachwordtwo=\it % Italicises second line of gloss
+\renewcommand{\firstrefdash}{} % Removes dash between example number and letter in references
+
+% Proofs
+\usepackage{prooftree}
+
+% Syntax trees
+% \usepackage{qtree}
+% \qtreecenterfalse
+\usepackage[linguistics]{forest}
+\forestset{
+default preamble={%
+for tree={s sep=5mm, inner sep=1, l=0pt}}
+    }
+
+
+
+\usepackage{lipsum}
+
+%==========%
+%  Macros  %
+%==========%
 
 \input{jyf-macros}
-
-%% First mention of technical term
-\newcommand{\fm}[1]{\textsc{#1}}
 
 %===========%
 %   Title   %
 %===========%
 
 \title{Title over two \\ lines}
-\author{Jamie Y. Findlay\\\small University of Oxford\\\small\email{jamie.findlay@ling-phil.ox.ac.uk}}
+\author{Jamie Y. Findlay\\\small University of Oslo\\\small\email{jamie.findlay@iln.uio.no}}
 \date{}
 
-%===================%
-%   Document start  %
-%===================%
+%===============================================================================
+%                               Document start                                 %
+%===============================================================================
 
 \begin{document}
 
@@ -48,7 +158,7 @@ This is an abstract: \lipsum[1]
 %   Bibliography    %
 %===================%
 
-\bibliographystyle{sp}				% Semantics & Pragmatics bibliography style
+\bibliographystyle{jyf-sp} % My modified version of the Semantics & Pragmatics bibliography style
 \bibliography{linguistics}
 
 \end{document}

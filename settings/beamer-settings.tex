@@ -114,8 +114,14 @@
 \usepackage{prooftree}
 
 % Syntax trees
-\usepackage{mary-trees}
-\usepackage{tikz-qtree}
+\usepackage{qtree}
+\qtreecenterfalse
+\usepackage[linguistics]{forest}
+\forestset{
+default preamble={
+for tree={s sep=5mm, inner sep=1, l=0pt}
+}
+}
 
 % OT tableaux
 \usepackage[round, medium]{OTtablx}		%For OT tableaux.
