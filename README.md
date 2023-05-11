@@ -1,6 +1,6 @@
 # LaTeX templates
 
-Basic templates for my various $\LaTeX$ needs. All organised in the file `latex-templates.org`, which, when saved, [tangles](https://orgmode.org/manual/Extracting-Source-Code.html) a number of template files to the `templates` directory. This approach is inspired by (and in part shamelessly copied from) Timm Lichte's rather more sophisticated implementation (<https://rubygems.pkg.github.com/timmli/latex-templates>).
+Basic templates for my various $\LaTeX$ needs. All organised in the file `latex-templates.org`, which, when saved, [tangles](https://orgmode.org/manual/Extracting-Source-Code.html) a number of template files to the `templates` directory. This approach is inspired by (and in part shamelessly copied from) Timm Lichte's [rather more sophisticated implementation](https://github.com/timmli/latex-templates).
 
 
 Currently in use:
