@@ -1,0 +1,95 @@
+\documentclass[
+11pt,
+draft,
+a4paper
+]{article}
+
+%===============================================================================
+%                                 Preamble                                     %
+%===============================================================================
+
+%===========%
+%   Fonts   %
+%===========%
+
+\usepackage[T1]{fontenc} % For more font encoding options
+\usepackage{lmodern} % For better quality fonts
+\usepackage[normalem]{ulem} % For underlining (use \uline{...})
+
+
+\usepackage{times}
+%===============%
+%    Layout     %
+%===============%
+
+\usepackage{booktabs} % Better quality tables.
+\usepackage{multirow} % Tabular cells spanning multiple rows
+\usepackage{pbox} % Intelligent variable width parboxes
+\usepackage[font=small, labelfont=bf]{caption} % Caption formatting
+
+\renewcommand\refname{References} % Change the name of the bibliography
+
+% My preferred formatting of the quote environment
+\renewenvironment{quote}
+               {\list{}{\rightmargin\leftmargin}%
+                \item\relax\small}
+               {\endlist}
+
+\frenchspacing % Single spacing after periods
+
+
+\usepackage[margin=1in]{geometry}
+
+%============================%
+%   Graphics and diagrams    %
+%============================%
+
+\usepackage{graphicx}
+\usepackage[dvipsnames]{xcolor} % for handling colours; allows referring to them by name
+
+
+%==============%
+%  Hyperlinks  %
+%==============%
+
+\usepackage[breaklinks,hidelinks]{hyperref} % hidelinks avoids boxes around links
+\urlstyle{rm} % tt,rm,sf,same
+\definecolor{hlinkcolor}{rgb}{.0,.2,.4} % A nice dark blue
+%
+\hypersetup{%
+colorlinks=true,%
+urlcolor=hlinkcolor,%
+linkcolor = black,% For internal links
+citecolor = black% For citation links
+}
+
+
+\usepackage{lipsum}
+
+%==========%
+%  Macros  %
+%==========%
+
+\input{jyf-macros}
+
+%===========%
+%   Title   %
+%===========%
+
+\title{Title over two \\ lines}
+\author{Jamie Y. Findlay\\\small University of Oslo\\\small\email{jamie.findlay@iln.uio.no}}
+\date{}
+
+%===============================================================================
+%                               Document start                                 %
+%===============================================================================
+
+\begin{document}
+
+\maketitle
+
+\section{Section}
+
+\lipsum
+
+\end{document}
