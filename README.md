@@ -6,8 +6,8 @@ Basic templates for my various $\LaTeX$ needs. All organised in the file `latex-
 Currently in use:
 - `plain` (narrow margins, Times font)
 - `article` (wide margins, Palatino font)
-- `lecture` (relatively plain, used for teaching)
-- `conference-presentation` (based on the [Metropolis](https://github.com/matze/mtheme) theme, modified with some [Nord](https://www.nordtheme.com/docs/colors-and-palettes) palette choices)
+- `lecture` (relatively plain Beamer slides, used for teaching)
+- `conference-presentation` (Beamer slides based on the [Metropolis](https://github.com/matze/mtheme) theme, modified with some [Nord](https://www.nordtheme.com/docs/colors-and-palettes) palette choices)
 - `tufte-handout` (an experiment with handouts based on the style of Edward Tufte, using the [tufte-latex](https://tufte-latex.github.io/tufte-latex/) classes) 
 
 Still to be converted:
