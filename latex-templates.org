@@ -595,6 +595,7 @@ numbering = fraction % none, counter (def)
 \PassOptionsToPackage{dvipsnames}{xcolor}
 \documentclass[
 11pt,
+aspectratio=169, % comment out for standard Beamer 4:3 ratio
 %handout,
 ]{beamer}
 
