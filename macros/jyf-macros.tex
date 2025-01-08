@@ -1,6 +1,7 @@
 %%%%%% GENERAL %%%%%%
 
 %% Symbols
+% Nice tick and cross (requires pifont package)
 \newcommand{\cmark}{\ding{51}}
 \newcommand{\xmark}{\ding{55}}
 
@@ -252,8 +253,8 @@
 %% Glue stuff %%
 
 % General semantics stuff
-\newcommand{\tuple}[1]{{\ensuremath{\langle #1 \rangle}}}
-\newcommand{\denotes}[1]{\ensuremath{\llbracket \textnormal{#1} \rrbracket}}
+\newcommand{\tuple}[1]{\ensuremath{\langle #1 \rangle}}
+\newcommand{\denotes}[1]{\ensuremath{\llbracket \textnormal{#1} \rrbracket}} % Requires stmaryrd package
 % Brian Buccola's neat solution that suppresses whitespace when optional arguments are not present.
 % \usepackage{etoolbox}
 % \newcommand*\sv[2][]{%
@@ -273,7 +274,7 @@
 \newcommand{\exper}{\prd{exp}}
 %
 \newcommand{\translation}[1]{\ensuremath{\denotes{\norm{#1}} = }}
-
+\newcommand{\translates}[1]{\translation{#1}}
 
 %% Proofs
 \newcommand{\prooftab}[1]{%
@@ -283,6 +284,7 @@
 \newcommand{\proofchunk}[1]{%
 \prooftab{#1}
 }
+\newcommand{\thickrule}{\justifies \thickness=0.08em}
 
 \newcommand{\lex}[1]{\textbf{\denotes{#1}}}
 
@@ -290,7 +292,6 @@
 \newcommand{\li}{\ensuremath{\multimap}}
 \newcommand{\tens}{\ensuremath{\otimes}}
 \newcommand{\means}{\ensuremath{\rightsquigarrow}}
-\newcommand{\thickrule}{\justifies \thickness=0.08em}
 
 %% LFG-specific things %%
 
