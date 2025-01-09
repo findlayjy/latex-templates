@@ -572,7 +572,17 @@
 
 % TODO Fix it so that \thanks is not spaced out (with `soul') and can be
 % used in \maketitle when the `sfsidenotes' option is provided.
-\renewcommand{\thanks}[1]{\NoCaseChange{\footnote{#1}}}
+% \renewcommand{\thanks}[1]{\NoCaseChange{\footnote{#1}}}
+% My definition, based on LFG proceedings class
+\renewcommand{\thanks}[1]{%
+\setcounter{footnote}{1}%
+\renewcommand{\thefootnote}{$\star$}%
+\footnote{%
+  #1
+}%
+\renewcommand{\thefootnote}{\arabic{footnote}}%
+\setcounter{footnote}{0}%
+}
 
 \renewcommand{\title}[2][]{%
   \gdef\@title{#2}%
@@ -881,7 +891,7 @@
     \BR@c@bibitem{#2}%
   }%
   \nobibliography*% pre-loads the bibliography keys
-  \providecommand{\doi}[1]{\textsc{doi:} #1}% pre-defining this so it may be used before the \bibliography command it issued
+  % \providecommand{\doi}[1]{\textsc{doi:} #1}% pre-defining this so it may be used before the \bibliography command it issued
 }{}
 
 %%
