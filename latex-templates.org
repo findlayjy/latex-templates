@@ -404,7 +404,7 @@ This is an abstract: \lipsum[1]
 \bibpunct{(}{)}{;}{a}{}{,}
 \setcitestyle{notesep={:\ }} % Changes separator between year and page to colon
 
-% <<hyperlink-settings>>
+<<hyperlink-settings>>
 <<linguistics-settings>>
 % Taken from https://groups.google.com/g/tufte-latex/c/7iKZHKKT5u0 -- adding this after linguex has been loaded will restore the Tufte-LaTeX definition of footnotes (as sidenotes) but adds in the two lines of code used by the gb4e package (via linguex).
 \makeatletter
