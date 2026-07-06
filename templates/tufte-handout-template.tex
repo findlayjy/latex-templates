@@ -10,7 +10,8 @@ a4paper
 % %   Fonts   %
 % %===========%
 % 
-% \usepackage[T1]{fontenc} % For more font encoding options
+% \usepackage[LGR,T1]{fontenc} % For more font encoding options
+% \usepackage[utf8]{inputenc}
 % \usepackage{lmodern} % For better quality fonts
 % \usepackage[normalem]{ulem} % For underlining (use \uline{...})
 % 
@@ -43,7 +44,7 @@ a4paper
 %====================%
 
 \usepackage{tikz}
-\usetikzlibrary{positioning,tikzmark,calc,arrows.meta}
+\usetikzlibrary{positioning,tikzmark,calc,arrows.meta,shapes.symbols,fit}
 
 
 \usepackage{graphicx} % allow embedded images
@@ -81,7 +82,8 @@ a4paper
 
 \usepackage[breaklinks,hidelinks]{hyperref} % hidelinks avoids boxes around links
 \urlstyle{rm} % tt,rm,sf,same
-\definecolor{hlinkcolor}{rgb}{.0,.2,.4} % A nice dark blue
+%\definecolor{hlinkcolor}{rgb}{.0,.2,.4} % A nice dark blue
+\definecolor{hlinkcolor}{rgb}{.0,.1,.7} % A nice dark blue
 %
 \hypersetup{%
 colorlinks=true,%
@@ -114,6 +116,14 @@ citecolor = black% For citation links
 \let\eachwordtwo=\it % Italicises second line of gloss
 \renewcommand{\firstrefdash}{} % Removes dash between example number and letter in references
 
+% This changes the itemsep (vertical space between items) specifically for sub-examples
+% \usepackage{etoolbox} % Required, but provided by jyf-macros.tex
+
+\makeatletter
+% \patchcmd{\a}{\itemsep\z@}{\itemsep 6pt plus 2pt minus 2pt}{}{}
+\patchcmd{\a}{\itemsep\z@}{\itemsep 4pt plus 1pt minus 1pt}{}{}
+\makeatother
+  
 % Proofs
 \usepackage{prooftree}
 

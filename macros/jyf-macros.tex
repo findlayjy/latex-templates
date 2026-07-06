@@ -1,4 +1,6 @@
 %%%%%% GENERAL %%%%%%
+\usepackage{etoolbox}
+% Used for Brian's denotation brackets macro, and my semantic predicate macro (not the latter any more)
 
 %% Symbols
 % Nice tick and cross (requires pifont package)
@@ -23,13 +25,15 @@
 \newcommand{\gapclause}{{\ensuremath{\%\lfg{Gap\hyph Clause}}}}
 \newcommand{\Gap}{{\ensuremath{\%\lfg{Gap}}}}
 \newcommand{\relpro}{{\ensuremath{\%\lfg{RelPro}}}}
-\newcommand{\saidthing}{\prd{said\hyph thing}}
-\newcommand{\partof}{\prd{part\hyph of}}
-\newcommand{\beans}{\prd{\null^*\idprd{bean}}}
-\newcommand{\ktb}{\prd{kick\hyph the\hyph bucket}}
+\newcommand{\saidthing}{\nlc{said\hyph thing}}
+\newcommand{\partof}{\nlc{part\hyph of}}
+\newcommand{\beans}{\nlc{\null^*\idprd{bean}}}
+\newcommand{\ktb}{\nlc{kick\hyph the\hyph bucket}}
 
 %% Subscript command for general use
 \newcommand{\sub}[1]{\ensuremath{_{#1}}}
+%% Susbcript command for formatting in text mode
+\newcommand{\tsub}[1]{\ensuremath{_{\textnormal{#1}}}}
 
 %% linguex
 %% Use numbers instead of letters for subexamples
@@ -77,7 +81,8 @@
 
 \newcommand{\diagram}[1]{\evnup{\includegraphics{#1}}}
 
-
+% asterisks to indicate a break
+\newcommand{\starskip}{\smallskip\hfill*\blank*\blank*\hfill\smallskip}
 
 %%%%%% BIBTEX %%%%%%
 
@@ -88,9 +93,9 @@
 %%%%%% LINGUISTICS %%%%%%%
 
 %% Commands for nicely aligned primes; borrowed from qtree
-% \newcommand{\0}{\ifmmode ^0\else \rlap{$^0$}\fi}
-% \newcommand{\1}{\ifmmode '\else \rlap{$'$}\fi}%
-% \newcommand{\2}{\ifmmode ''\else \rlap{$''$}\fi}%
+\newcommand{\0}{\ifmmode ^0\else \rlap{$^0$}\fi}
+\newcommand{\1}{\ifmmode '\else \rlap{$'$}\fi}%
+\newcommand{\2}{\ifmmode ''\else \rlap{$''$}\fi}%
 
 %% Prime for use in running text
 \newcommand{\pr}{\ensuremath{'}}
@@ -161,12 +166,23 @@
 \newcommand{\norm}[1]{\textnormal{#1}}
 \newcommand{\hyph}{\norm{-}}
 \newcommand{\var}[1]{\textit{#1}}
-\newcommand{\prd}[1]{\ensuremath{\mathbf{#1}}}
-\newcommand{\idprd}[1]{\prd{#1\hyph id}}
+% \newcommand{\prd}[1]{\ensuremath{\mathbf{#1}}}
+% \newcommand{\prd}[1]{\nlc{#1}}
+
+\newcommand\prd[2]{%
+  \ensuremath{%
+    \nlc{#1}{\left(#2\right)}%
+  }}%
+
+\newcommand{\nlc}[1]{\ensuremath{\mathbf{#1}}}
+\newcommand{\idprd}[1]{\nlc{#1\hyph id}}
 
 %% For sources of example sentences
-\newcommand{\source}[1]{{\footnotesize{(#1)}}}
-\newcommand{\urlsource}[1]{{\footnotesize{(\url{#1})}}}
+\def\signed #1{{\leavevmode\unskip\nobreak\hfil\penalty50\hskip2em
+  \hbox{}\nobreak\hfil(#1)%
+  \parfillskip=0pt \finalhyphendemerits=0 \endgraf}}
+\newcommand{\source}[1]{\signed{#1}}
+\newcommand{\urlsource}[1]{{\source{\url{#1}}}}
 
 
 %% Phrase structure rules %%
@@ -188,37 +204,47 @@
 
 %% For multiline annotations (csn = C-structure node)
 \newcommand{\csn}[2]{%
-\setlength\tabcolsep{1pt}
-	 \begin{tabular}[c]{c}
-		 \protect{#1}\\
-	 	 \scalebox{0.9}{$\begin{array}{c}#2\end{array}$}
-	 \end{tabular}%
-	}
+  \setlength\tabcolsep{1pt}
+  \begin{tabular}[c]{c}
+    \protect{#1}\\
+    \scalebox{0.9}{\ensuremath{\begin{array}{c}#2\end{array}}}
+  \end{tabular}%
+}
 
-\newcommand{\symb}[2]{%
-\setlength\tabcolsep{1pt}
-	 \begin{tabular}[t]{c}
-	 \protect{#1}\\
-	 \scalebox{0.9}{$\begin{array}{c}#2\end{array}$}
-		 \end{tabular}%
-	}
+\newcommand{\opc}[2]{ % off-path constraints: a top-aligned version of \csn
+  \setlength\tabcolsep{1pt}
+  \begin{tabular}[t]{c}
+    \protect{#1}\\
+    \scalebox{0.9}{\ensuremath{\begin{array}{c}#2\end{array}}}
+  \end{tabular}%
+}
+
+\newcommand{\symb}[2]{\csn{#1}{#2}}
+
+% \newcommand{\symb}[2]{%
+%   \setlength\tabcolsep{1pt}
+%   \begin{tabular}[t]{c}
+%     \protect{#1}\\
+%     \scalebox{0.9}{\ensuremath{\begin{array}{c}#2\end{array}}}
+%   \end{tabular}%
+% }
 
 \newcommand{\optsymb}[2]{%
 \setlength\tabcolsep{1pt}
 \evnup{\opt{
 	 \begin{tabular}[c]{c}
 	 \protect{#1}\\
-	 \scalebox{0.9}{$\begin{array}{c}#2\end{array}$}
+	 \scalebox{0.9}{\ensuremath{\begin{array}{c}#2\end{array}}}
 		 \end{tabular}%
 	}}}
 
 \newcommand{\symbx}[2]{%
-\setlength\tabcolsep{1pt}
-	 \begin{tabular}[c]{c}
-	 \protect{#1}\\
-	 \scalebox{0.9}{$\begin{array}{c}#2\end{array}$}
-		 \end{tabular}%
-	}
+  \setlength\tabcolsep{1pt}
+  \begin{tabular}[c]{c}
+    \protect{#1}\\
+    \scalebox{0.9}{\ensuremath{\begin{array}{c}#2\end{array}}}
+  \end{tabular}%
+}
 
 % \newcommand{\csn}[2]{%
 %   \begin{tabular}[t]{c}
@@ -235,10 +261,10 @@
 
 \newcommand{\mathtab}[3]{%
 \ensuremath{%
-\begin{array}[#1]{#2}
-#3
+\begin{array}[#1]{#2}%
+#3%
 \end{array}%
-}
+}%
 }
 
 
@@ -253,36 +279,38 @@
 %% Glue stuff %%
 
 % General semantics stuff
-\newcommand{\tuple}[1]{\ensuremath{\langle #1 \rangle}}
+\newcommand{\tuple}[1]{\ensuremath{{\left\langle #1 \right\rangle}}}
+\newcommand{\set}[1]{\ensuremath{{\left\{#1\right\}}}}
+\newcommand{\Set}[1]{\ensuremath{{\big\{#1\big\}}}}
+\newcommand{\card}[1]{\ensuremath{{\lvert#1\rvert}}}
 \newcommand{\denotes}[1]{\ensuremath{\llbracket \textnormal{#1} \rrbracket}} % Requires stmaryrd package
 % Brian Buccola's neat solution that suppresses whitespace when optional arguments are not present.
-% \usepackage{etoolbox}
-% \newcommand*\sv[2][]{%
-%   \ensuremath{%
-%     \llbracket
-%     \ifblank{#2}{\;\cdot\;}{#2}
-%     \rrbracket
-%     \ifblank{#1}{}{^{#1}}
-%   }
-% }
+\newcommand*\ldenotes[2][]{%
+  \ensuremath{%
+    \llbracket
+    \ifblank{#2}{\dots}{#2}
+    \rrbracket
+    \ifblank{#1}{}{^{#1}}%
+  }%
+}
 \newcommand{\Land}{\land}
-\newcommand{\pt}{\prd{pt}}
-\newcommand{\agt}{\prd{ag}}
-\newcommand{\thm}{\prd{th}}
-\newcommand{\ben}{\prd{ben}}
-\newcommand{\goal}{\prd{goal}}
-\newcommand{\exper}{\prd{exp}}
+\newcommand{\pt}{\nlc{pt}}
+\newcommand{\agt}{\nlc{ag}}
+\newcommand{\thm}{\nlc{th}}
+\newcommand{\ben}{\nlc{ben}}
+\newcommand{\goal}{\nlc{goal}}
+\newcommand{\exper}{\nlc{exp}}
 %
 \newcommand{\translation}[1]{\ensuremath{\denotes{\norm{#1}} = }}
 \newcommand{\translates}[1]{\translation{#1}}
 
 %% Proofs
 \newcommand{\prooftab}[1]{%
-\mathtab{b}{l}{#1}
+\mathtab{b}{l}{#1}%
 }
 
 \newcommand{\proofchunk}[1]{%
-\prooftab{#1}
+\prooftab{#1}%
 }
 \newcommand{\thickrule}{\justifies \thickness=0.08em}
 
@@ -319,6 +347,8 @@
 \newcommand{\up}[1]{\ensuremath{(\ua \textsc{#1})}}
 \newcommand{\ups}[1]{\ensuremath{(\ua \textsc{#1})_\sig}}
 \newcommand{\us}[1]{\ensuremath{(\ua_\sig \textsc{#1})}}
+% Giving PRED values
+\newcommand{\uppred}[1]{\ensuremath{\up{pred} = \textnormal{`#1'}}}
 
 \newcommand{\dn}[1]{\ensuremath{(\da \textsc{#1})}}
 \newcommand{\dns}[1]{\ensuremath{(\da \textsc{#1})_\sig}}
@@ -339,7 +369,17 @@
 \begin{tabular}[t]{l|ll}
 	      &	$-r$	&	$+r$			\\
 	\hline
-  $-o$	&	\subj	&	\obl{$\theta$}	\\
-  $+o$	&	\obj	&	\objth{$\theta$}
+  $-o$	&	\subj	&	\obl	\\
+  $+o$	&	\obj	&	\objth
 \end{tabular}%
 }
+
+%% Lexical entry
+\newcommand{\lexentry}[3]{%
+    \begin{tabular}[t]{ccl}%
+      \emph{#1} & \textnormal{#2} & \ensuremath{%
+                                    \begin{array}[t]{l}%
+                                      #3
+                                    \end{array}}%
+    \end{tabular}
+  }

@@ -12,7 +12,8 @@ a4paper
 %   Fonts   %
 %===========%
 
-\usepackage[T1]{fontenc} % For more font encoding options
+\usepackage[LGR,T1]{fontenc} % For more font encoding options
+\usepackage[utf8]{inputenc}
 \usepackage{lmodern} % For better quality fonts
 \usepackage[normalem]{ulem} % For underlining (use \uline{...})
 
@@ -35,9 +36,12 @@ a4paper
                 \item\relax\small}
                {\endlist}
 
+\usepackage{tabto} % Enables specific tab widths
+               
 \frenchspacing % Single spacing after periods
 
-
+% Mathmode aware strikethrough text
+\newcommand{\stkout}[1]{\ifmmode\text{\sout{\ensuremath{#1}}}\else\sout{#1}\fi}
 \usepackage[margin=1in]{geometry}
 
 %============================%
@@ -54,7 +58,8 @@ a4paper
 
 \usepackage[breaklinks,hidelinks]{hyperref} % hidelinks avoids boxes around links
 \urlstyle{rm} % tt,rm,sf,same
-\definecolor{hlinkcolor}{rgb}{.0,.2,.4} % A nice dark blue
+%\definecolor{hlinkcolor}{rgb}{.0,.2,.4} % A nice dark blue
+\definecolor{hlinkcolor}{rgb}{.0,.1,.7} % A nice dark blue
 %
 \hypersetup{%
 colorlinks=true,%

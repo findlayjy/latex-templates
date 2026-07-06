@@ -30,7 +30,8 @@ numbering = fraction % none, counter (def)
 %   Fonts   %
 %===========%
 
-\usepackage[T1]{fontenc} % For more font encoding options
+\usepackage[LGR,T1]{fontenc} % For more font encoding options
+\usepackage[utf8]{inputenc}
 \usepackage{lmodern} % For better quality fonts
 \usepackage[normalem]{ulem} % For underlining (use \uline{...})
 
@@ -54,9 +55,12 @@ numbering = fraction % none, counter (def)
                 \item\relax\small}
                {\endlist}
 
+\usepackage{tabto} % Enables specific tab widths
+               
 \frenchspacing % Single spacing after periods
 
-
+% Mathmode aware strikethrough text
+\newcommand{\stkout}[1]{\ifmmode\text{\sout{\ensuremath{#1}}}\else\sout{#1}\fi}
 \usepackage{appendixnumberbeamer}
 
 
@@ -71,7 +75,7 @@ numbering = fraction % none, counter (def)
 %====================%
 
 \usepackage{tikz}
-\usetikzlibrary{positioning,tikzmark,calc,arrows.meta}
+\usetikzlibrary{positioning,tikzmark,calc,arrows.meta,shapes.symbols,fit}
 
 
 %=============%
@@ -127,6 +131,14 @@ numbering = fraction % none, counter (def)
 \let\eachwordtwo=\it % Italicises second line of gloss
 \renewcommand{\firstrefdash}{} % Removes dash between example number and letter in references
 
+% This changes the itemsep (vertical space between items) specifically for sub-examples
+% \usepackage{etoolbox} % Required, but provided by jyf-macros.tex
+
+\makeatletter
+% \patchcmd{\a}{\itemsep\z@}{\itemsep 6pt plus 2pt minus 2pt}{}{}
+\patchcmd{\a}{\itemsep\z@}{\itemsep 4pt plus 1pt minus 1pt}{}{}
+\makeatother
+  
 % Proofs
 \usepackage{prooftree}
 

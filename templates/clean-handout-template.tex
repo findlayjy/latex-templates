@@ -1,6 +1,6 @@
 \documentclass[
-11pt,
-draft,
+12pt,
+% draft,
 a4paper
 ]{article}
 
@@ -18,8 +18,7 @@ a4paper
 \usepackage[normalem]{ulem} % For underlining (use \uline{...})
 
 
-\usepackage[sc,osf]{mathpazo} % Palatino font, w/ smallcaps & old-style figures
-% \usepackage{times} % Times New Roman font
+\usepackage{times}
 
 %===============%
 %    Layout     %
@@ -44,6 +43,8 @@ a4paper
 
 % Mathmode aware strikethrough text
 \newcommand{\stkout}[1]{\ifmmode\text{\sout{\ensuremath{#1}}}\else\sout{#1}\fi}
+\usepackage[margin=1in]{geometry}
+
 %============================%
 %   Graphics and diagrams    %
 %============================%
@@ -146,6 +147,140 @@ for tree={s sep=5mm, inner sep=1, l=0pt}}
 
 
 
+%%% MDFRAME BOX STYLES AND SETUP %%%
+
+\usepackage[framemethod=tikz]{mdframed}
+\usetikzlibrary{shadows}
+
+%% DEFINING STYLES %%
+% Base style; box with rounded corners
+\mdfdefinestyle{rcbox}{%
+roundcorner = 10pt,%
+leftmargin = 40,%
+rightmargin = 40,%
+innertopmargin = \topskip,%
+innerbottommargin = \topskip,%
+skipabove = \topskip,%
+frametitleaboveskip = 0.75\topskip,%
+frametitlebelowskip = 0.5\topskip,%
+frametitlebackgroundcolor={gray!30}%
+}
+
+% Exercise box
+\mdfdefinestyle{exbox}{%
+outerlinewidth = 1,%
+roundcorner = 5pt,%
+leftmargin = 40,%
+rightmargin = 40,%
+backgroundcolor = gray!10,%
+outerlinecolor = gray,%
+innertopmargin = \topskip,%
+innerbottommargin = \topskip,%
+% splittopskip = \topskip,%
+frametitlebackgroundcolor={gray!30}%
+}
+
+%% DEFINING BOXES FROM THESE STYLES
+% A box for quotations
+\newmdenv[style=rcbox,%
+outerlinewidth = 0,%
+backgroundcolor = gray!30,%
+shadow=true,%
+]{quotationbox}
+
+% Just a simple box for highlighting things; has a blueish border
+% Takes an optional argument that provides a title
+\newmdenv[style=rcbox,%
+outerlinewidth = 1,%
+backgroundcolor = gray!10,%
+outerlinecolor = blue!70!black,%
+linecolor = blue!70!black,%
+]{hlbox}
+%
+\makeatletter
+\let\orig@hlbox=\hlbox
+\def\hlbox{
+  \@ifnextchar[{\hlbox@opt}{\orig@hlbox}
+}
+\def\hlbox@opt[#1]{
+  \orig@hlbox[frametitle={#1}]
+}
+\makeatother
+%
+
+% A box for exercises. Also takes an optional argument for a heading
+\newmdenv[style=exbox]{exbox}
+%
+\makeatletter
+\let\orig@exbox=\exbox
+\def\exbox{
+  \@ifnextchar[{\exbox@opt}{\orig@exbox}
+}
+\def\exbox@opt[#1]{
+  \orig@exbox[frametitle={#1}]
+}
+\makeatother
+%
+
+%% ENVIRONMENTS USING THESE BOXES
+% Simple highlight box
+\newenvironment{highlightbox}[1][]%
+{\begin{hlbox}[#1]\sloppy}%
+  {\end{hlbox}}
+
+% Helper function for references
+\def\signed #1{{\leavevmode\unskip\nobreak\hfil\penalty50\hskip2em
+  \hbox{}\nobreak\hfil(#1)%
+  \parfillskip=0pt \finalhyphendemerits=0 \endgraf}}
+
+% Quotation box with reference
+\NewDocumentEnvironment{quotebox}{o}%
+{\begin{quotationbox}\sloppy%
+    \IfNoValueTF{#1}%
+    {}%
+    {\def\attrib{\signed{#1}}}%
+  }%
+  {\IfNoValueTF{#1}%
+    {}%
+    {\attrib}%
+    \end{quotationbox}}
+
+% Include emojis
+\usepackage{twemojis}
+
+% Different emojis to use in exercise labels
+\newcommand{\memo}{memo}
+\newcommand{\lightbulb}{bulb}
+\newcommand{\groupwork}{busts in silhouette}
+\newcommand{\discuss}{left speech bubble}
+\newcommand{\together}{speaking head}
+\newcommand{\solo}{memo}
+
+
+%% Setup for exercises, with counter
+\newcounter{exercise}
+
+\newcommand{\exemoji}{{\Large\texttwemoji{memo}}}
+\NewDocumentEnvironment{exercise}{oO{\memo}}%
+{%
+  \renewcommand{\exemoji}{{\Large\texttwemoji{#2}}}
+  \bigskip
+  % \begin{fullwidth}
+  \refstepcounter{exercise}%
+  \IfNoValueTF{#1}
+  {\begin{exbox}[\exemoji~Exercise~\theexercise]}%
+  {\begin{exbox}[\exemoji~Exercise~\theexercise: #1]}%
+    \sloppy%
+  }
+    {%
+    \end{exbox}%
+    % \end{fullwidth}%
+}
+
+%%% END OF MDFRAME SETUP %%%
+
+
+
 \usepackage{lipsum}
 
 %==========%
@@ -154,13 +289,63 @@ for tree={s sep=5mm, inner sep=1, l=0pt}}
 
 \input{jyf-macros}
 
+% Some box-based highlighting for individual words
+\newcommand{\myblue}{blue!70!black}
+\newcommand{\hlblue}[1]{\textcolor{blue}{\textbf{#1}}}
+
+\newcommand{\keyterm}[1]{%
+\tikz[baseline=(word.base),anchor=text]{%
+  \node[fill=gray!10, thick, rounded corners, draw=\myblue] (word) {\textsc{\textcolor{black}{#1}}};
+  }%
+}
+
+\newcommand{\solidbox}[2][black]{%
+\tikz[baseline=(word.base),anchor=text]{%
+% \tikz{%
+  \node[draw=#1,line cap = round, line width=1pt] (word) {#2\strut};
+  }
+}
+
+\newcommand{\dottedbox}[1]{%
+\tikz[baseline=(word.base),anchor=text]{%
+% \tikz{%
+  \node[draw,dotted,line cap = round, line width=1.25pt, dash pattern=on 0pt off 3\pgflinewidth] (word) {#1\strut};
+  }
+}
+
+\newcommand{\dashedbox}[1]{%
+% \tikz[baseline=(word.base),anchor=text]{%
+\tikz[baseline=(word.base),anchor=text]{%
+  \node[draw,dashed] (word) {#1\strut};
+  }
+}
+
+\newcommand{\bangbox}[1]{%
+% \tikz[baseline=(word.base),anchor=text]{%
+\tikz[baseline=(word.base),anchor=text]{%
+  \node[draw,starburst] (word) {#1\strut};
+  }
+}
+
+\newcommand{\fillbox}[1]{%
+% \tikz[baseline=(word.base),anchor=text]{%
+\tikz[baseline=(word.base),anchor=text]{%
+  \node[fill=gray!40] (word) {#1\strut};
+  }
+}
+
+\newcommand{\badbox}[1]{\fillbox{#1}}
+  
 %===========%
 %   Title   %
 %===========%
 
-\title{Title over two \\ lines}
-\author{Jamie Y. Findlay\\\small University of Oslo\\\small\email{jamie.findlay@iln.uio.no}}
-\date{}
+\newcommand{\headerblock}[2]{%
+  {\Large\noindent MAIN COURSE TITLE\\[0.5em]
+    \LARGE \textbf{#1}\\[0.5em]
+    \large Jamie Y. Findlay (\email{j.y.findlay@iln.uio.no})\\[0.5em]
+    \large #2}%
+}
 
 %===============================================================================
 %                               Document start                                 %
@@ -168,15 +353,22 @@ for tree={s sep=5mm, inner sep=1, l=0pt}}
 
 \begin{document}
 
-\maketitle
-
-\begin{abstract}%
-This is an abstract: \lipsum[1]
-\end{abstract}
+\headerblock%
+{1. This week's title}
+{dd/mm/yyyy}
 
 \section{Section}
 
-\lipsum
+\lipsum[3]
+
+\begin{exercise}[Some exercise]
+  Some text
+\end{exercise}
+
+\begin{exercise}[Some exercise using a different emoji][\together]
+  Some text
+\end{exercise}
+
 
 %===================%
 %   Bibliography    %
